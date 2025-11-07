@@ -1,0 +1,80 @@
+CREATE TABLE employees (
+id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+                email TEXT NOT NULL,
+                    department TEXT NOT NULL,
+                        profile_picture BLOB
+                        ) STRICT;
+
+                        INSERT INTO employees (id, name, email, department, profile_picture) 
+                        VALUES
+                        (1, 'Lerato Mokoena', 'lerato.m@corp.com', 'Finance', 'employee1_blob'),
+                        (2, 'Thabo Dlamini', 'thabo.d@corp.com', 'IT', 'employee2_blob'),
+                        (3, 'Naledi Khumalo', 'naledi.k@corp.com', 'Marketing', 'employee3_blob'),
+                        (4, 'Sipho Ndlovu', 'sipho.n@corp.com', 'Operations', 'employee4_blob');
+
+                        CREATE TABLE projects (
+                            id INTEGER PRIMARY KEY,
+                                title TEXT NOT NULL,
+                                    description TEXT NOT NULL,
+                                        budget INTEGER,
+                                            document BLOB
+                                            ) STRICT;
+
+                                            INSERT INTO projects (id, title, description, budget, document) 
+                                            VALUES
+                                            (101, 'Digital Transformation', 'Upgrade internal systems to cloud-based solutions.', 500000, 'project_doc_blob1'),
+                                            (102, 'Customer Engagement Campaign', 'Develop a marketing campaign to increase client retention.', 300000, 'project_doc_blob2'),
+                                            (103, 'Financial Audit 2025', 'Conduct a full internal audit of all financial operations.', 150000, 'project_doc_blob3');
+
+                                            CREATE TABLE assignments (
+                                                id INTEGER PRIMARY KEY,
+                                                    employee_id INTEGER NOT NULL,
+                                                        project_id INTEGER NOT NULL,
+                                                            role TEXT NOT NULL,
+                                                                progress_report BLOB,
+                                                                    FOREIGN KEY (employee_id) REFERENCES employees(id),
+                                                                        FOREIGN KEY (project_id) REFERENCES projects(id)
+                                                                        ) STRICT ;
+
+                                                                        INSERT INTO assignments (id, employee_id, project_id, role, progress_report) 
+                                                                        VALUES
+                                                                        (201, 1, 103, 'Auditor', 'audit_notes_blob'),
+                                                                        (202, 2, 101, 'System Engineer', 'tech_updates_blob'),
+                                                                        (203, 3, 102, 'Marketing Lead', 'campaign_blob'),
+                                                                        (204, 4, 101, 'Operations Analyst', 'ops_summary_blob');
+
+                                                                        CREATE TABLE departments (
+                                                                            id INTEGER PRIMARY KEY,
+                                                                                name TEXT NOT NULL,
+                                                                                    manager TEXT,
+                                                                                        description TEXT,
+                                                                                            logo BLOB
+                                                                                            ) STRICT;
+
+                                                                                            INSERT INTO departments (id, name, manager, description, logo) 
+                                                                                            VALUES
+                                                                                            (10, 'Finance', 'Lerato Mokoena', 'Handles budgeting, accounting, and auditing tasks.', 'dept_logo_blob1'),
+                                                                                            (11, 'IT', 'Thabo Dlamini', 'Responsible for technical infrastructure and support.', 'dept_logo_blob2'),
+                                                                                            (12, 'Marketing', 'Naledi Khumalo', 'Focuses on advertising, branding, and customer outreach.', 'dept_logo_blob3'),
+                                                                                            (13, 'Operations', 'Sipho Ndlovu', 'Ensures efficient internal workflows and logistics.', 'dept_logo_blob4');
+
+                                                                                            CREATE TABLE reports (
+                                                                                                id INTEGER PRIMARY KEY,
+                                                                                                    project_id INTEGER NOT NULL,
+                                                                                                        employee_id INTEGER NOT NULL,
+                                                                                                            title TEXT NOT NULL,
+                                                                                                                summary TEXT,
+                                                                                                                    attachment BLOB
+                                                                                                                        FOREIGN KEY (project_id) REFERENCES projects(id),
+                                                                                                                            FOREIGN KEY (employee_id) REFERENCES employees(id)
+                                                                                                                            ) STRICT;
+
+                                                                                                                            INSERT INTO reports (id, project_id, employee_id, title, summary, attachment) 
+                                                                                                                            VALUES
+                                                                                                                            (301, 101, 2, 'System Migration Summary', 'Initial migration completed, testing in progress.', 'report_blob1'),
+                                                                                                                            (302, 102, 3, 'Campaign Launch Report', 'The engagement campaign achieved 15% growth in leads.', 'report_blob2'),
+                                                                                                                            (303, 103, 1, 'Audit Findings', 'Identified discrepancies in Q1 expense reports.', 'report_blob3'),
+                                                                                                                            (304, 101, 4, 'Operational Efficiency Review', 'Process improvements led to a 10% reduction in delays.', 'report_blob4');
+
+)
