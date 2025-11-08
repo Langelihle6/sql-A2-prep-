@@ -29,4 +29,8 @@ record_apis: [{
   name: "REPORTS"
   table_name: "reports"
   acl_world: [CREATE, READ, UPDATE, DELETE]
+}, {
+  name: "TEMP_USER"
+  table_name: "temp_user"
+  acl_world: [CREATE, READ, UPDATE, DELETE]
 }]
